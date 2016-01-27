@@ -247,7 +247,7 @@ module Databasedotcom
     def update(class_or_classname, record_id, new_attrs)
       class_or_classname = find_or_materialize(class_or_classname)
       json_for_update = coerced_json(new_attrs, class_or_classname)
-      http_patch("/services/data/v#{self.version}/sobjects/#{class_or_classname.sobject_name}/#{record_id}", json_for_update)
+      http_patch("/services/data/v#{self.version}/sobjects/#{class_or_classname.sobject_name}/#{record_id}", json_for_update, parameters={}, headers={"Sforce-Auto-Assign" => "FALSE"})
     end
 
     # Attempts to find the record on Force.com of type _class_or_classname_ with attribute _field_ set as _value_. If found, it will update the record with the _attrs_ hash.
